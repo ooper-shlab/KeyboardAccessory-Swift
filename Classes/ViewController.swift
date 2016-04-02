@@ -108,7 +108,7 @@ class ViewController: UIViewController, UITextViewDelegate {
 //    // observe keyboard hide and show notifications to resize the text view appropriately
 //    [[NSNotificationCenter defaultCenter] addObserver:self
         NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "keyboardWillShow:",
+            selector: #selector(ViewController.keyboardWillShow(_:)),
             name: UIKeyboardWillShowNotification,
             object: nil)
 //                                             selector:@selector(keyboardWillShow:)
@@ -116,7 +116,7 @@ class ViewController: UIViewController, UITextViewDelegate {
 //                                               object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self
         NSNotificationCenter.defaultCenter().addObserver(self,
-            selector: "keyboardWillHide:",
+            selector: #selector(ViewController.keyboardWillHide(_:)),
             name: UIKeyboardWillHideNotification,
             object: nil)
 //                                             selector:@selector(keyboardWillHide:)
