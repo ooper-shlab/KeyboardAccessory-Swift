@@ -85,11 +85,11 @@ class ViewController: UIViewController, UITextViewDelegate {
         
         // observe keyboard hide and show notifications to resize the text view appropriately
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(ViewController.keyboardWillShow(_:)),
+                                               selector: #selector(self.keyboardWillShow(_:)),
                                                name: .UIKeyboardWillShow,
                                                object: nil)
         NotificationCenter.default.addObserver(self,
-                                               selector: #selector(ViewController.keyboardWillHide(_:)),
+                                               selector: #selector(self.keyboardWillHide(_:)),
                                                name: .UIKeyboardWillHide,
                                                object: nil)
         
@@ -114,13 +114,13 @@ class ViewController: UIViewController, UITextViewDelegate {
     
     //MARK: - Actions
     
-    @IBAction func doneAction(_: AnyObject) {
+    @IBAction func doneAction(_: Any) {
         
         // user tapped the Done button, release first responder on the text view
         self.textView.resignFirstResponder()
     }
     
-    @IBAction func editAction(_: AnyObject) {
+    @IBAction func editAction(_: Any) {
         
         // user tapped the Edit button, make the text view first responder
         self.textView.becomeFirstResponder()
@@ -245,11 +245,10 @@ class ViewController: UIViewController, UITextViewDelegate {
     @IBAction func tappedMe(_: UIButton) {
         
         // when the accessory view button is tapped, add a suitable string to the text view
-        let text = self.textView.text.mutableCopy() as! NSMutableString
-        let selectedRange = self.textView.selectedRange
+        let text = self.textView.text ?? ""
+        let selectedRange = Range(self.textView.selectedRange, in: text)!
         
-        text.replaceCharacters(in: selectedRange, with: "\nYou tapped me.")
-        self.textView.text = text as String
+        self.textView.text = text.replacingCharacters(in: selectedRange, with: "\nYou tapped me.")
         
         self.adjustSelection(self.textView) //###
     }
